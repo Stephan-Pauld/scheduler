@@ -4,11 +4,16 @@ import DayList from "components/DayList";
 import "components/Application.scss";
 import Appointment from "components/Appointment/index";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "../helpers/selectors";
+import useVisualMode from '../hooks/useVisualMode'
 
-
+const EMPTY = "EMPTY";
+const SHOW = "SHOW";
+const CREATE = "CREATE";
+const CANCEL = "CANCEL";
+const SAVE = "SAVE";
 
 export default function Application(props) {
-
+  const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY);
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -32,12 +37,35 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
-    console.log(appointment, "=-=-==-=-");
-    setState({...state, appointments});
-    console.log(appointments, "qqqqqq");
-  }
-  
+    setState({ ...state, appointments });
 
+    axios
+      .put(`http://localhost:8001/api/appointments/${id}`, { interview})
+      .then((res) => { })
+      .catch((res) => { })
+  }
+
+
+  function cancelInterview(id) {
+
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    setState({ ...state, appointments });
+    
+    // axios
+    // .delete(`http://localhost:8001/api/appointments/${id}`)
+    // .then(() => {
+    //   })
+    //   .catch((res) => { console.log(res)})
+    
+  }
 
 
   useEffect(() => {
@@ -74,6 +102,7 @@ export default function Application(props) {
         interview={interview}
         interviewers={interviewers}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
 
     );
