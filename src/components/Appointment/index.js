@@ -8,6 +8,7 @@ import "./styles.scss";
 import Show from './Show'
 import Header from './Header'
 import Empty from './Empty'
+import Error from './Error'
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
@@ -16,7 +17,8 @@ const CANCEL = "CANCEL";
 const SAVE = "SAVE";
 const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
-
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY);
@@ -27,22 +29,29 @@ export default function Appointment(props) {
       interviewer
     };
 
-    transition(SAVE)
+    transition("SAVE");
     props.bookInterview(props.id, interview)
-    setTimeout(() => {
-      transition(SHOW)
-    }, 1000);
 
+      .then((res) => {
+        transition(SHOW);
+
+      })
+      .catch((error) => {
+        transition(ERROR_SAVE, true);
+      })
   }
+// IS THIS SUPPOSED TO TAKE IN A PARAM????? COMPASS USESES "event"
   const delInterview = () => {
-
-    transition(CANCEL)
+    transition(CANCEL, true)
     props.cancelInterview(props.id, props)
-    setTimeout(() => {
-      transition(EMPTY)
-    }, 1000);
+      .then((res) => {
+        transition(EMPTY)
+      })
+      .catch((error) => {
+        transition(ERROR_DELETE, true);
+      })
   }
-  
+
   return (
     <article className="appointment">
       <Header
@@ -55,7 +64,6 @@ export default function Appointment(props) {
           interviewers={props.interviewers}
           onCancel={back}
           onSave={save}
-          bookInterview={props.bookInterview}
         />
       )}
 
@@ -64,15 +72,11 @@ export default function Appointment(props) {
           interviewers={props.interviewers}
           onCancel={back}
           onSave={save}
-          bookInterview={props.bookInterview}
           name={props.interview.student}
           interviewer={props.interview.interviewer.id}
         />
       )}
-
-
       {/* STATUS MESSAGES!!!!!!! */}
-
       {mode === SAVE && (
         <Status
           message={"Saving"}
@@ -95,14 +99,27 @@ export default function Appointment(props) {
           onEdit={() => transition(EDIT)}
         />
       )}
-      {mode === CONFIRM && (
 
+      {mode === CONFIRM && (
         <Confirm
           message={"ARE YOU SURE YOU WANT TO DELETE?"}
           onCancel={back}
           onConfirm={delInterview}
         />
+      )}
 
+      {mode === ERROR_SAVE && (
+        <Error
+          message={"There was an error saving"}
+          onClose={back}
+        />
+      )}
+
+      {mode === ERROR_DELETE && (
+        <Error
+          message={"There was an error Deleting"}
+          onClose={back}
+        />
       )}
 
 

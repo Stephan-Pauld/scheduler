@@ -6,7 +6,6 @@ export default function DayListItem(props) {
 
   let dayItem = classNames("day-list__item", {"day-list__item--selected": props.selected, "day-list__item--full": props.spots === 0})
   
-
   const formatSpots = (spots) => {
     let sentance = `${spots} `
     if (spots > 1) {
