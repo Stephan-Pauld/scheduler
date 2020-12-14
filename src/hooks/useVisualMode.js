@@ -1,6 +1,5 @@
 
 import { useState } from 'react'
-import { renderHook, act } from "@testing-library/react-hooks";
 
 
 export default function useVisualMode(initial) {

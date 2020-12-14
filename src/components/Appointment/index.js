@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import useVisualMode from '../../hooks/useVisualMode'
-import { getInterviewersForDay } from "../../helpers/selectors";
 import Status from "./Status";
 import Form from './Form'
 import Confirm from './Confirm'

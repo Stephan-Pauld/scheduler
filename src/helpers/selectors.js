@@ -5,7 +5,7 @@ const getAppointmentsForDay = function (state, day) {
   const dayobj = state.days.find(d => {
     return d.name === day
   });
-  if (!state.day || dayobj === undefined) {
+  if (dayobj === undefined) {
     return []
   }
   const appointments = dayobj.appointments.map(id => {
@@ -32,8 +32,10 @@ const getInterviewersForDay = function (state, dayOfweek) {
     if (day.name === dayOfweek){
       for (const elem of day.interviewers) {
           arr.push(state.interviewers[elem])
-        }
+        
+        
       }
+    }
   }
   return arr;
 }
@@ -44,3 +46,7 @@ module.exports = {
   getInterview,
   getInterviewersForDay
 }
+
+
+
+

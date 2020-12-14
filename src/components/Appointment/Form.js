@@ -36,6 +36,7 @@ export default function Form(props) {
           onSave = {props.onSave}
           onCancel = {props.onCancel}
           onSubmit={event => event.preventDefault()}
+          data-testid="student-name-input"
         /*
           This must be a controlled component
         */
