@@ -39,7 +39,7 @@ export default function Appointment(props) {
         transition(ERROR_SAVE, true);
       })
   }
-// IS THIS SUPPOSED TO TAKE IN A PARAM????? COMPASS USESES "event"
+
   const delInterview = () => {
     transition(CANCEL, true)
     props.cancelInterview(props.id, props)
@@ -52,7 +52,7 @@ export default function Appointment(props) {
   }
 
   return (
-    <article className="appointment">
+    <article className="appointment" data-testid="appointment">
       <Header
         time={props.time}
       />
@@ -109,14 +109,14 @@ export default function Appointment(props) {
 
       {mode === ERROR_SAVE && (
         <Error
-          message={"There was an error saving"}
+          message="There was an error saving"
           onClose={back}
         />
       )}
 
       {mode === ERROR_DELETE && (
         <Error
-          message={"There was an error Deleting"}
+          message="There was an error Deleting"
           onClose={back}
         />
       )}

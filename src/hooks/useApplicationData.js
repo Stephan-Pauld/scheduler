@@ -35,7 +35,7 @@ export default function useApplicationData() {
     };
 
     return axios
-      .put(`http://localhost:8001/api/appointments/${id}`, { interview })
+      .put(`/api/appointments/${id}`, { interview })
       .then((res) => {
 
         if (res.status === 204) {
@@ -59,7 +59,7 @@ export default function useApplicationData() {
     };
 
     return axios
-      .delete(`http://localhost:8001/api/appointments/${id}`)
+      .delete(`/api/appointments/${id}`)
       .then((res) => {
         if (res.status === 204) {
           changeSpots(1)
@@ -70,9 +70,9 @@ export default function useApplicationData() {
 
 
   useEffect(() => {
-    const daysUrl = 'http://localhost:8001/api/days';
-    const apptsUrl = 'http://localhost:8001/api/appointments';
-    const interviewersUrl = 'http://localhost:8001/api/interviewers';
+    const daysUrl = '/api/days';
+    const apptsUrl = '/api/appointments';
+    const interviewersUrl = '/api/interviewers';
 
     Promise.all([
       axios.get(daysUrl),
