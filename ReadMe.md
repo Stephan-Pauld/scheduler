@@ -30,6 +30,12 @@ Install dependencies with `npm install`.
 npm start
 ```
 ## Screenshots
-!["Initial Screen"](sdfgsdgf)
-!["Create New Appointment"](sdfgdsgds)
-!["Cancel Appointment"](dfgdfg)
+### Deleting spinner
+!["deleting spinner"](https://github.com/Stephan-Pauld/scheduler/blob/master/images/deleting.png?raw=true)
+
+### An empty day all appointments available
+!["empty day"](https://github.com/Stephan-Pauld/scheduler/blob/master/images/mainpage.png?raw=true)
+### The different forms that show depending on the state of the appointment
+!["Forms"](https://github.com/Stephan-Pauld/scheduler/blob/master/images/selected%20days.png?raw=true)
+### Remaining spots if an appointment gets booked or removed
+!["Spots"](https://github.com/Stephan-Pauld/scheduler/blob/master/images/sidebar.png?raw=true)
