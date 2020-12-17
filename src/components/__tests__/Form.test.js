@@ -31,7 +31,7 @@ describe("Form", () => {
     const onSave = jest.fn();
     
     const { getByText } = render(
-      <Form interviewers={interviewers} onSave={onSave} />
+      <Form interviewers={interviewers} onSave={onSave}  />
     );
     fireEvent.click(getByText("Save"));
     /* 1. validation is shown */
@@ -51,6 +51,7 @@ describe("Form", () => {
       interviewers={interviewers}
       onSave={onSave}
       name="Lydia Miller-Jones"
+      interviewer={1}
     />
     );
     fireEvent.click(getByText("Save"));
